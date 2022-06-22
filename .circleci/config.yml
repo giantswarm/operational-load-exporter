@@ -1,0 +1,57 @@
+version: 2
+
+jobs:
+  build-binary:
+    docker:
+      - image: quay.io/giantswarm/golang:1.17.5
+    working_directory: /workdir
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - restore_cache:
+          keys:
+            - go-mod-v1-{{ checksum "go.sum" }}
+      - run: |
+          CGO_ENABLED=0 go test -ldflags "-w -X main.gitCommit=${CIRCLE_SHA1} -linkmode 'auto' -extldflags '-static'" ./...
+      - run: |
+          CGO_ENABLED=0 go build -ldflags "-w -X main.gitCommit=${CIRCLE_SHA1} -linkmode 'auto' -extldflags '-static'" -o operational-load-exporter .
+      - save_cache:
+          key: go-mod-v1-{{ checksum "go.sum" }}
+          paths:
+            - "/go/pkg/mod"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./operational-load-exporter
+  deploy-image:
+    docker:
+      - image: quay.io/giantswarm/docker:18.09.1
+    working_directory: /workdir
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: |
+          docker version
+      - run: |
+          docker build --tag quay.io/giantswarm/operational-load-exporter:${CIRCLE_SHA1} .
+      - run: |
+          docker tag quay.io/giantswarm/operational-load-exporter:${CIRCLE_SHA1} quay.io/giantswarm/operational-load-exporter:latest
+      - run: |
+          docker login -u ${QUAY_USERNAME} -p ${QUAY_PASSWORD} quay.io
+      - run: |
+          docker push quay.io/giantswarm/operational-load-exporter:${CIRCLE_SHA1}
+      - run: |
+          docker push quay.io/giantswarm/operational-load-exporter:latest
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build-binary
+      - deploy-image:
+          requires:
+            - build-binary
