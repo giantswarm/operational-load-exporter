@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-agent
+  namespace: operational-load-exporter
+data:
+  agent.yaml: |
+    metrics:
+      global:
+        scrape_interval: 300s
+      configs:
+      - name: operational-load-exporter
+        remote_write:
+        - url: CORTEX_URL
+          basic_auth:
+            username: CORTEX_USERNAME
+            password: CORTEX_PASSWORD
+        scrape_configs:
+        - job_name: operational-load-exporter
+          static_configs:
+            - targets: ["localhost:8000"]
