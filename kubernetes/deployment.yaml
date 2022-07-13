@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: operational-load-exporter
+  namespace: operational-load-exporter
+  labels:
+    app: operational-load-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: operational-load-exporter
+  template:
+    metadata:
+      labels:
+        app: operational-load-exporter
+    spec:
+      containers:
+      - name: operational-load-exporter
+        image: quay.io/giantswarm/operational-load-exporter:latest
+        env:
+        - name: OPSGENIE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: operational-load-exporter
+              key: OPSGENIE_KEY
+              optional: false 
+      - name: grafana-agent
+        image: grafana/agent:v0.25.0
+        args:
+        - -config.file=/etc/agent/agent.yaml
+        - -server.http.address=0.0.0.0:8001
+        volumeMounts:
+        - name: grafana-agent
+          mountPath: /etc/agent
+        - name: agent-wal
+          mountPath: /var/lib/agent
+      serviceAccount: operational-load-exporter
+      volumes:
+      - name: grafana-agent
+        configMap:
+          name: grafana-agent
+      - name: agent-wal
+        emptyDir: {}
