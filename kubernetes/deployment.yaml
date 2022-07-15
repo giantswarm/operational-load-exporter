@@ -24,7 +24,7 @@ spec:
             secretKeyRef:
               name: operational-load-exporter
               key: OPSGENIE_KEY
-              optional: false 
+              optional: false
       - name: grafana-agent
         image: grafana/agent:v0.25.0
         args:
