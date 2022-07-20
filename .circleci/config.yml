@@ -1,57 +1,39 @@
-version: 2
-
-jobs:
-  build-binary:
-    docker:
-      - image: quay.io/giantswarm/golang:1.17.5
-    working_directory: /workdir
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - restore_cache:
-          keys:
-            - go-mod-v1-{{ checksum "go.sum" }}
-      - run: |
-          CGO_ENABLED=0 go test -ldflags "-w -X main.gitCommit=${CIRCLE_SHA1} -linkmode 'auto' -extldflags '-static'" ./...
-      - run: |
-          CGO_ENABLED=0 go build -ldflags "-w -X main.gitCommit=${CIRCLE_SHA1} -linkmode 'auto' -extldflags '-static'" -o operational-load-exporter .
-      - save_cache:
-          key: go-mod-v1-{{ checksum "go.sum" }}
-          paths:
-            - "/go/pkg/mod"
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ./operational-load-exporter
-  deploy-image:
-    docker:
-      - image: quay.io/giantswarm/docker:18.09.1
-    working_directory: /workdir
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: |
-          docker version
-      - run: |
-          docker build --tag quay.io/giantswarm/operational-load-exporter:${CIRCLE_SHA1} .
-      - run: |
-          docker tag quay.io/giantswarm/operational-load-exporter:${CIRCLE_SHA1} quay.io/giantswarm/operational-load-exporter:latest
-      - run: |
-          docker login -u ${QUAY_USERNAME} -p ${QUAY_PASSWORD} quay.io
-      - run: |
-          docker push quay.io/giantswarm/operational-load-exporter:${CIRCLE_SHA1}
-      - run: |
-          docker push quay.io/giantswarm/operational-load-exporter:latest
+version: 2.1
+orbs:
+  architect: giantswarm/architect@4.24.0
 
 workflows:
-  version: 2
-  build-and-deploy:
+  build:
     jobs:
-      - build-binary
-      - deploy-image:
+      - architect/go-build:
+          context: architect
+          name: go-build
+          binary: operational-load-exporter
+          filters:
+            tags:
+              only: /^v.*/
+
+      - architect/push-to-docker:
+          context: architect
+          name: push-operational-load-exporter-to-quay
+          image: "quay.io/giantswarm/operational-load-exporter"
+          username_envar: "QUAY_USERNAME"
+          password_envar: "QUAY_PASSWORD"
           requires:
-            - build-binary
+            - go-build
+          filters:
+            tags:
+              only: /^v.*/
+
+      - architect/push-to-app-catalog:
+          context: architect
+          requires:
+            - push-operational-load-exporter-to-quay
+          name: push-to-app-catalog
+          executor: app-build-suite
+          app_catalog: "giantswarm-operations-platform-catalog"
+          app_catalog_test: "giantswarm-operations-platform-test-catalog"
+          chart: "operational-load-exporter"
+          filters:
+            tags:
+              only: /^v.*/
