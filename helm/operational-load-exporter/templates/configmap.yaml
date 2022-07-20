@@ -11,10 +11,10 @@ data:
       configs:
       - name: operational-load-exporter
         remote_write:
-        - url: CORTEX_URL
+        - url: {{ .Values.cortex.url }}
           basic_auth:
-            username: CORTEX_USERNAME
-            password: CORTEX_PASSWORD
+            username: {{ .Values.cortex.username }}
+            password: {{ .Values.cortex.password }}
         scrape_configs:
         - job_name: operational-load-exporter
           static_configs:
