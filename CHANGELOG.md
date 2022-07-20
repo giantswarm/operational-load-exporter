@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2022-07-20
+
 - changed: first release!
 
-[Unreleased]: https://github.com/giantswarm/operational-load-exporter/tree/main
+[Unreleased]: https://github.com/giantswarm/operational-load-exporter/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/giantswarm/operational-load-exporter/releases/tag/v0.1.2
