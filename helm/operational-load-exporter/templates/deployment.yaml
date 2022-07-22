@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: operational-load-exporter
-        image: "quay.io/giantswarm/operational-load-exporter::{{ .Values.image.tag }}"
+        image: quay.io/giantswarm/operational-load-exporter:{{ .Chart.Version }}
         resources:
           requests:
             cpu: 250m

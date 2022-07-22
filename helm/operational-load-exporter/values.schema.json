@@ -16,14 +16,6 @@
                 }
             }
         },
-        "image": {
-            "type": "object",
-            "properties": {
-                "tag": {
-                    "type": "string"
-                }
-            }
-        },
         "opsgenie": {
             "type": "object",
             "properties": {
