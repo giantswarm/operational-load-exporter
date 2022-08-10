@@ -26,6 +26,12 @@ spec:
             cpu: 250m
             memory: 250Mi
         env:
+        - name: GITHUB_KEY
+          valueFrom:
+            secretKeyRef:
+              name: operational-load-exporter
+              key: GITHUB_KEY
+              optional: false
         - name: OPSGENIE_KEY
           valueFrom:
             secretKeyRef:
