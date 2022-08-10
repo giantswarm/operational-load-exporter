@@ -16,6 +16,14 @@
                 }
             }
         },
+        "github": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                }
+            }
+        },
         "opsgenie": {
             "type": "object",
             "properties": {

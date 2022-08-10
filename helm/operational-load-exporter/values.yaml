@@ -3,5 +3,8 @@ cortex:
   username: ""
   password: ""
 
+github:
+  key: ""
+
 opsgenie:
   key: ""
