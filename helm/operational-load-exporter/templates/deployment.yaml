@@ -32,6 +32,12 @@ spec:
               name: operational-load-exporter
               key: GITHUB_KEY
               optional: false
+        - name: INCIDENT_IO_KEY
+          valueFrom:
+            secretKeyRef:
+              name: operational-load-exporter
+              key: INCIDENT_IO_KEY
+              optional: false
         - name: OPSGENIE_KEY
           valueFrom:
             secretKeyRef:

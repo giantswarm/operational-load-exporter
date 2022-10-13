@@ -6,5 +6,8 @@ cortex:
 github:
   key: ""
 
+incidentio:
+  key: ""
+
 opsgenie:
   key: ""
