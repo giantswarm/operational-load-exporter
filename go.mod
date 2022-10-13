@@ -27,3 +27,7 @@ require (
 	google.golang.org/appengine v1.6.6 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 )
+
+replace (
+    golang/golang.org/x/text v0.3.7 => golang/golang.org/x/text v0.3.8
+)
