@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"time"
@@ -72,7 +72,7 @@ func NewIncidentCollector(apiKey string) (*incidentCollector, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		b, _ := ioutil.ReadAll(resp.Body)
+		b, _ := io.ReadAll(resp.Body)
 		log.Printf("received http code: %v, error: %v", resp.StatusCode, string([]byte(b)))
 	}
 
@@ -137,7 +137,7 @@ func (c *incidentCollector) Collect(ch chan<- prometheus.Metric) {
 		defer resp.Body.Close()
 
 		if resp.StatusCode != http.StatusOK {
-			b, _ := ioutil.ReadAll(resp.Body)
+			b, _ := io.ReadAll(resp.Body)
 			log.Printf("received http code: %v, error: %v", resp.StatusCode, string([]byte(b)))
 		}
 
