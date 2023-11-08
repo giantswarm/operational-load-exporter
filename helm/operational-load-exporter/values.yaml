@@ -3,6 +3,9 @@ cortex:
   username: ""
   password: ""
 
+kyvernoPolicyExceptions:
+  enabled: true
+
 github:
   key: ""
 

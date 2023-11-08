@@ -15,6 +15,10 @@ spec:
       labels:
         app: operational-load-exporter
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
       - name: operational-load-exporter
         image: quay.io/giantswarm/operational-load-exporter:{{ .Chart.Version }}

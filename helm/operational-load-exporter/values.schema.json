@@ -16,6 +16,14 @@
                 }
             }
         },
+        "kyvernoPolicyExceptions": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+                "type": "boolean"
+            }
+          }
+        },
         "github": {
             "type": "object",
             "properties": {

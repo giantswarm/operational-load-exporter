@@ -1,0 +1,23 @@
+{{- if .Values.kyvernoPolicyExceptions.enabled }}
+  {{- if .Capabilities.APIVersions.Has "policy.giantswarm.io/v1alpha1/PolicyException" -}}
+apiVersion: policy.giantswarm.io/v1alpha1
+kind: PolicyException
+metadata:
+  name: operational-load-exporter
+  namespace: policy-exceptions
+  labels:
+    app: operational-load-exporter
+spec:
+  policies:
+  - disallow-capabilities-strict
+  - restrict-seccomp-strict
+  - require-run-as-nonroot
+  - disallow-privilege-escalation
+  targets:
+  - kind: Deployment
+    names:
+    - operational-load-exporter*
+    namespaces:
+    - operational-load-exporter
+  {{- end -}}
+{{- end -}}
