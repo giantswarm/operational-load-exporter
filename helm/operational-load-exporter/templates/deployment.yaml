@@ -56,6 +56,10 @@ spec:
         args:
         - -config.file=/etc/agent/agent.yaml
         - -server.http.address=0.0.0.0:8001
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
         volumeMounts:
         - name: grafana-agent
           mountPath: /etc/agent
