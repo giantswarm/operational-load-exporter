@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add icon.
 
+### Changed
+
+- Change the registries to new ones.
+
 ## [0.3.0] - 2022-10-13
 
 ## [0.2.1] - 2022-08-10
