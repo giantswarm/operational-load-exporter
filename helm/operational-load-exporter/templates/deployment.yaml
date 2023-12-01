@@ -45,7 +45,7 @@ spec:
               key: OPSGENIE_KEY
               optional: false
       - name: grafana-agent
-        image: grafana/agent:v0.25.0
+        image: grafana/agent:v0.38.1
         resources:
           requests:
             cpu: 250m
