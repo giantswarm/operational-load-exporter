@@ -11,3 +11,7 @@ incidentio:
 
 opsgenie:
   key: ""
+
+global:
+  podSecurityStandards:
+    enforced: false
