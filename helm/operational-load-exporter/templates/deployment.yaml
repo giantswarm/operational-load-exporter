@@ -70,7 +70,7 @@ spec:
         - name: grafana-agent
           mountPath: /etc/agent
         - name: agent-wal
-          mountPath: /var/lib/agent
+          mountPath: /tmp/wal
       serviceAccountName: operational-load-exporter
       volumes:
       - name: grafana-agent

@@ -8,6 +8,7 @@ data:
     metrics:
       global:
         scrape_interval: 300s
+      wal_directory: /tmp/wal
       configs:
       - name: operational-load-exporter
         remote_write:
