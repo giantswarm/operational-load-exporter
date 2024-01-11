@@ -32,7 +32,7 @@ func main() {
 	http.Handle("/metrics", promhttp.Handler())
 
 	server := &http.Server{
-		Addr:              ":8080",
+		Addr:              ":8000",
 		ReadHeaderTimeout: 5 * time.Second,
 	}
 	if err := server.ListenAndServe(); err != nil {
