@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: operational-load-exporter
-        image: quay.io/giantswarm/operational-load-exporter:{{ .Chart.Version }}
+        image: gsoci.azurecr.io/giantswarm/operational-load-exporter:{{ .Chart.Version }}
         resources:
           requests:
             cpu: 250m
@@ -45,7 +45,7 @@ spec:
               key: OPSGENIE_KEY
               optional: false
       - name: grafana-agent
-        image: grafana/agent:v0.25.0
+        image: gsoci.azurecr.io/giantswarm/agent:v0.25.0
         resources:
           requests:
             cpu: 250m
