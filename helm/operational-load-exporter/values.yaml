@@ -12,6 +12,22 @@ incidentio:
 opsgenie:
   key: ""
 
+resources:
+  main:
+    requests:
+      cpu: 2m
+      memory: 20Mi
+    limits:
+      cpu: 50m
+      memory: 200Mi
+  grafanaAgent:
+    requests:
+      cpu: 8m
+      memory: 50Mi
+    limits:
+      cpu: 50m
+      memory: 200Mi
+
 global:
   podSecurityStandards:
     enforced: false

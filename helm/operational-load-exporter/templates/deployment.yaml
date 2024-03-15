@@ -18,13 +18,7 @@ spec:
       containers:
       - name: operational-load-exporter
         image: gsoci.azurecr.io/giantswarm/operational-load-exporter:{{ .Chart.Version }}
-        resources:
-          requests:
-            cpu: 250m
-            memory: 250Mi
-          limits:
-            cpu: 250m
-            memory: 250Mi
+        resources: {{ .Values.resources.main }}
         env:
         - name: GITHUB_KEY
           valueFrom:
@@ -45,14 +39,8 @@ spec:
               key: OPSGENIE_KEY
               optional: false
       - name: grafana-agent
-        image: gsoci.azurecr.io/giantswarm/agent:v0.25.0
-        resources:
-          requests:
-            cpu: 250m
-            memory: 250Mi
-          limits:
-            cpu: 250m
-            memory: 250Mi
+        image: gsoci.azurecr.io/giantswarm/grafana-agent:v0.25.0
+        resources: {{ .Values.resources.grafanaAgent }}
         args:
         - -config.file=/etc/agent/agent.yaml
         - -server.http.address=0.0.0.0:8001
