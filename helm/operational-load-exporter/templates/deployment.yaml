@@ -18,13 +18,7 @@ spec:
       containers:
       - name: operational-load-exporter
         image: quay.io/giantswarm/operational-load-exporter:{{ .Chart.Version }}
-        resources:
-          requests:
-            cpu: 250m
-            memory: 250Mi
-          limits:
-            cpu: 250m
-            memory: 250Mi
+        resources: {{ .Values.resources.main }}
         env:
         - name: GITHUB_KEY
           valueFrom:
@@ -46,13 +40,7 @@ spec:
               optional: false
       - name: grafana-agent
         image: grafana/agent:v0.25.0
-        resources:
-          requests:
-            cpu: 250m
-            memory: 250Mi
-          limits:
-            cpu: 250m
-            memory: 250Mi
+        resources: {{ .Values.resources.grafana-agent }}
         args:
         - -config.file=/etc/agent/agent.yaml
         - -server.http.address=0.0.0.0:8001
