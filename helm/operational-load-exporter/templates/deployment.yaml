@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: operational-load-exporter
-        image: quay.io/giantswarm/operational-load-exporter:{{ .Chart.Version }}
+        image: gsoci.azurecr.io/giantswarm/operational-load-exporter:{{ .Chart.Version }}
         resources: {{ .Values.resources.main }}
         env:
         - name: GITHUB_KEY
@@ -39,7 +39,7 @@ spec:
               key: OPSGENIE_KEY
               optional: false
       - name: grafana-agent
-        image: grafana/agent:v0.25.0
+        image: gsoci.azurecr.io/giantswarm/grafana-agent:v0.25.0
         resources: {{ .Values.resources.grafana-agent }}
         args:
         - -config.file=/etc/agent/agent.yaml

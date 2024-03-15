@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Make resource requests and limits configurable.
+- Use container image registry `gsoci.azurecr.io`
+
 
 ## [0.4.2] - 2024-01-11
 
