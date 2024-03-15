@@ -20,7 +20,7 @@ resources:
     limits:
       cpu: 50m
       memory: 200Mi
-  grafana-agent:
+  grafanaAgent:
     requests:
       cpu: 8m
       memory: 50Mi

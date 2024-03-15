@@ -56,7 +56,7 @@
         "resources": {
             "type": "object",
             "properties": {
-                "grafana-agent": {
+                "grafanaAgent": {
                     "type": "object",
                     "properties": {
                         "limits": {
