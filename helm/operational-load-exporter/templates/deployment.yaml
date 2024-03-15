@@ -18,7 +18,8 @@ spec:
       containers:
       - name: operational-load-exporter
         image: gsoci.azurecr.io/giantswarm/operational-load-exporter:{{ .Chart.Version }}
-        resources: {{ .Values.resources.main }}
+        resources:
+          {{- toYaml .Values.resources.main | nindent 10 }}
         env:
         - name: GITHUB_KEY
           valueFrom:
@@ -40,7 +41,8 @@ spec:
               optional: false
       - name: grafana-agent
         image: gsoci.azurecr.io/giantswarm/grafana-agent:v0.25.0
-        resources: {{ .Values.resources.grafanaAgent }}
+        resources:
+          {{- toYaml .Values.resources.grafanaAgent | nindent 10 }}
         args:
         - -config.file=/etc/agent/agent.yaml
         - -server.http.address=0.0.0.0:8001
