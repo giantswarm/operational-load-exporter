@@ -1,16 +1,16 @@
 cortex:
-  url: ""
-  username: ""
-  password: ""
+  url: "DUMMY_VALUE"
+  username: "DUMMY_VALUE"
+  password: "DUMMY_VALUE"
 
 github:
-  key: ""
+  key: "DUMMY_VALUE"
 
 incidentio:
-  key: ""
+  key: "DUMMY_VALUE"
 
 opsgenie:
-  key: ""
+  key: "DUMMY_VALUE"
 
 resources:
   main:
