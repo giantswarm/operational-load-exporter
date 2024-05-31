@@ -40,7 +40,7 @@ spec:
               key: OPSGENIE_KEY
               optional: false
       - name: grafana-agent
-        image: gsoci.azurecr.io/giantswarm/grafana-agent:v0.40.5
+        image: gsoci.azurecr.io/giantswarm/grafana-agent:v0.41.0
         resources:
           {{- toYaml .Values.resources.grafanaAgent | nindent 10 }}
         args:
