@@ -6,7 +6,7 @@ require (
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/opsgenie/opsgenie-go-sdk-v2 v1.2.22
 	github.com/prometheus/client_golang v1.19.1
-	golang.org/x/oauth2 v0.20.0
+	golang.org/x/oauth2 v0.22.0
 )
 
 require (
