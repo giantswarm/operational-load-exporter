@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/opsgenie/opsgenie-go-sdk-v2 v1.2.23
-	github.com/prometheus/client_golang v1.20.4
+	github.com/prometheus/client_golang v1.20.5
 	golang.org/x/oauth2 v0.25.0
 )
 
