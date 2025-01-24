@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- Remove PodSecurityPolicy resources from helm chart as they are being deprecated in favor of Pod Security Standards.
+
 ## [0.4.4] - 2024-03-15
 
 - Fix template change made in 0.4.3
