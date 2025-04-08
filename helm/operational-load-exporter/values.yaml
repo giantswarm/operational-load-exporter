@@ -27,7 +27,3 @@ resources:
     limits:
       cpu: 50m
       memory: 200Mi
-
-global:
-  podSecurityStandards:
-    enforced: false
