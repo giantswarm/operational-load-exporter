@@ -2,7 +2,7 @@ module github.com/giantswarm/operational-load-exporter
 
 go 1.23.0
 
-toolchain go1.24.2
+toolchain go1.24.3
 
 require (
 	github.com/google/go-github v17.0.0+incompatible
