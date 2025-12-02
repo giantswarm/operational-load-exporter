@@ -11,23 +11,23 @@ import (
 )
 
 func main() {
-	githubCollector, err := NewGitHubCollector(os.Getenv("GITHUB_KEY"))
-	if err != nil {
-		log.Fatal(err)
-	}
-	prometheus.MustRegister(githubCollector)
+	// githubCollector, err := NewGitHubCollector(os.Getenv("GITHUB_KEY"))
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// prometheus.MustRegister(githubCollector)
 
-	incidentCollector, err := NewIncidentCollector(os.Getenv("INCIDENT_IO_KEY"))
-	if err != nil {
-		log.Fatal(err)
-	}
-	prometheus.MustRegister(incidentCollector)
+	// incidentCollector, err := NewIncidentCollector(os.Getenv("INCIDENT_IO_KEY"))
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// prometheus.MustRegister(incidentCollector)
 
-	opsgenieCollector, err := NewOpsgenieCollector(os.Getenv("OPSGENIE_KEY"))
+	pagerdutyCollector, err := NewPagerdutyCollector(os.Getenv("PAGERDUTY_AUTH_TOKEN"))
 	if err != nil {
 		log.Fatal(err)
 	}
-	prometheus.MustRegister(opsgenieCollector)
+	prometheus.MustRegister(pagerdutyCollector)
 
 	http.Handle("/metrics", promhttp.Handler())
 
