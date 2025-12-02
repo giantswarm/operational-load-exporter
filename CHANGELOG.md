@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Updated dependencies.
+- Fixed "Error return value of resp.Body.Close is not checked" where appropriate.
+
 ### Removed
 
 - Remove PodSecurityPolicy resources from helm chart as they are being deprecated in favor of Pod Security Standards.

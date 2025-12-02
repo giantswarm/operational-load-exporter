@@ -69,7 +69,12 @@ func NewIncidentCollector(apiKey string) (*incidentCollector, error) {
 	if err != nil {
 		log.Print(err)
 	}
-	defer resp.Body.Close()
+	defer func() {
+		err := resp.Body.Close()
+		if err != nil {
+			log.Print(err)
+		}
+	}()
 
 	if resp.StatusCode != http.StatusOK {
 		b, _ := io.ReadAll(resp.Body)
@@ -134,7 +139,12 @@ func (c *incidentCollector) Collect(ch chan<- prometheus.Metric) {
 		if err != nil {
 			log.Print(err)
 		}
-		defer resp.Body.Close()
+		defer func() {
+			err := resp.Body.Close()
+			if err != nil {
+				log.Print(err)
+			}
+		}()
 
 		if resp.StatusCode != http.StatusOK {
 			b, _ := io.ReadAll(resp.Body)
