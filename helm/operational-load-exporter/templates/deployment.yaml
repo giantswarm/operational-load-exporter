@@ -33,11 +33,11 @@ spec:
               name: operational-load-exporter
               key: INCIDENT_IO_KEY
               optional: false
-        - name: OPSGENIE_KEY
+        - name: PAGERDUTY_AUTH_TOKEN
           valueFrom:
             secretKeyRef:
               name: operational-load-exporter
-              key: OPSGENIE_KEY
+              key: PAGERDUTY_AUTH_TOKEN
               optional: false
       - name: grafana-agent
         image: gsoci.azurecr.io/giantswarm/grafana-agent:v0.44.3
