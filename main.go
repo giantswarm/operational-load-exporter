@@ -23,12 +23,6 @@ func main() {
 	}
 	prometheus.MustRegister(incidentCollector)
 
-	opsgenieCollector, err := NewOpsgenieCollector(os.Getenv("OPSGENIE_KEY"))
-	if err != nil {
-		log.Fatal(err)
-	}
-	prometheus.MustRegister(opsgenieCollector)
-
 	http.Handle("/metrics", promhttp.Handler())
 
 	server := &http.Server{
