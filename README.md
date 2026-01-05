@@ -8,7 +8,6 @@
 
 - GitHub
 - incident.io
-- Opsgenie
 
 ## Development
 
@@ -16,6 +15,5 @@ The following environment variables need to be set:
 
 - `GITHUB_KEY` - a GitHub token with `repo` scope
 - `INCIDENT_IO_KEY` - an incident.io API key
-- `OPSGENIE_KEY` - an OpsGenie API key
 
 Each data source is modelled as a separate Prometheus Collector, and then registered with the default handler.

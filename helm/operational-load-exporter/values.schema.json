@@ -24,28 +24,7 @@
                 }
             }
         },
-        "global":{
-            "type": "object",
-            "properties": {
-                "podSecurityStandards": {
-                    "type": "object",
-                    "properties": {
-                        "enforced": {
-                            "type": "boolean"
-                        }
-                    }
-                }
-            }
-        },
         "incidentio": {
-            "type": "object",
-            "properties": {
-                "key": {
-                    "type": "string"
-                }
-            }
-        },
-        "opsgenie": {
             "type": "object",
             "properties": {
                 "key": {

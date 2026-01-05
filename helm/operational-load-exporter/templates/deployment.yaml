@@ -33,12 +33,6 @@ spec:
               name: operational-load-exporter
               key: INCIDENT_IO_KEY
               optional: false
-        - name: OPSGENIE_KEY
-          valueFrom:
-            secretKeyRef:
-              name: operational-load-exporter
-              key: OPSGENIE_KEY
-              optional: false
       - name: grafana-agent
         image: gsoci.azurecr.io/giantswarm/grafana-agent:v0.44.3
         resources:

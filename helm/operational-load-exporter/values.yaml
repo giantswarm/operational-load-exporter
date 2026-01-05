@@ -9,9 +9,6 @@ github:
 incidentio:
   key: ""
 
-opsgenie:
-  key: ""
-
 resources:
   main:
     requests:
