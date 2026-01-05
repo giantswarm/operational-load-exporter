@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Remove PodSecurityPolicy resources from helm chart as they are being deprecated in favor of Pod Security Standards.
+- Remove OpsGenie collector
 
 ## [0.4.4] - 2024-03-15
 
