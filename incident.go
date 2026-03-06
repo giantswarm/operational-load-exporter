@@ -65,7 +65,7 @@ func NewIncidentCollector(apiKey string) (*incidentCollector, error) {
 	}
 	req.Header.Add("Authorization", "Bearer "+apiKey)
 
-	resp, err := client.Do(req)
+	resp, err := client.Do(req) // #nosec G704 -- URL is a hardcoded constant
 	if err != nil {
 		log.Print(err)
 	}
@@ -78,7 +78,7 @@ func NewIncidentCollector(apiKey string) (*incidentCollector, error) {
 
 	if resp.StatusCode != http.StatusOK {
 		b, _ := io.ReadAll(resp.Body)
-		log.Printf("received http code: %v, error: %v", resp.StatusCode, string([]byte(b)))
+		log.Printf("received http code: %v, error: %v", resp.StatusCode, string([]byte(b))) // #nosec G706 -- logging HTTP status from trusted API
 	}
 
 	showCustomFieldResponse := &ShowCustomFieldResponse{}
@@ -135,7 +135,7 @@ func (c *incidentCollector) Collect(ch chan<- prometheus.Metric) {
 		}
 		req.URL.RawQuery = values.Encode()
 
-		resp, err := client.Do(req)
+		resp, err := client.Do(req) // #nosec G704 -- URL is a hardcoded constant
 		if err != nil {
 			log.Print(err)
 		}
@@ -148,7 +148,7 @@ func (c *incidentCollector) Collect(ch chan<- prometheus.Metric) {
 
 		if resp.StatusCode != http.StatusOK {
 			b, _ := io.ReadAll(resp.Body)
-			log.Printf("received http code: %v, error: %v", resp.StatusCode, string([]byte(b)))
+			log.Printf("received http code: %v, error: %v", resp.StatusCode, string([]byte(b))) // #nosec G706 -- logging HTTP status from trusted API
 		}
 
 		listIncidentsResponse := &ListIncidentsResponse{}
