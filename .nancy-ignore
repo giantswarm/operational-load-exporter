@@ -1,2 +1,2 @@
-# pkg:golang/google.golang.org/protobuf@v1.36.0
-CVE-2024-6104 until=2025-09-30
+CVE-2026-63209 until=2026-09-09 # github.com/klauspost/compress@v1.18.0
+CVE-2026-46600 until=2026-09-09 # golang.org/x/net@v0.55.0

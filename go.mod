@@ -21,3 +21,5 @@ require (
 	golang.org/x/sys v0.46.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )
+
+replace golang.org/x/text v0.37.0 => golang.org/x/text v0.40.0
