@@ -10,6 +10,13 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
+const (
+	// TEAM_METRIC_LABEL is the Prometheus label every collector uses to break
+	// its metric down per team. Not to be confused with TEAM_LABEL_PREFIX,
+	// which is a GitHub issue label prefix.
+	TEAM_METRIC_LABEL = "team"
+)
+
 func main() {
 	githubCollector, err := NewGitHubCollector(os.Getenv("GITHUB_KEY"))
 	if err != nil {

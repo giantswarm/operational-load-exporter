@@ -108,7 +108,7 @@ func NewGitHubCollector(accessToken string) (*githubCollector, error) {
 		issueCounter: prometheus.NewDesc(
 			prometheus.BuildFQName("operations", "github", "issue_total"),
 			"Number of issues in GitHub",
-			[]string{"type", "team", "state"},
+			[]string{"type", TEAM_METRIC_LABEL, "state"},
 			nil,
 		),
 
