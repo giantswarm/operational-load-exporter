@@ -102,7 +102,7 @@ func NewIncidentCollector(apiKey string) (*incidentCollector, error) {
 		incidentCounter: prometheus.NewDesc(
 			prometheus.BuildFQName("operations", "incident_io", "incident_total"),
 			"Number of incidents in incident.io",
-			[]string{"team"},
+			[]string{TEAM_METRIC_LABEL},
 			nil,
 		),
 
