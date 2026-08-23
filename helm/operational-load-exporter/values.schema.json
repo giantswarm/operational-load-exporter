@@ -1,9 +1,11 @@
 {
-    "$schema": "http://json-schema.org/schema#",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
+    "additionalProperties": false,
     "properties": {
         "cortex": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "password": {
                     "type": "string"
@@ -18,14 +20,24 @@
         },
         "github": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "key": {
                     "type": "string"
                 }
             }
         },
+        "global": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "description": "Global values shared between all subcharts",
+            "$comment": "Added automatically by 'helm schema' to allow this chart to be used as a Helm dependency, as the `additionalProperties` setting would otherwise collide with Helm's special 'global' values key."
+        },
         "incidentio": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "key": {
                     "type": "string"
@@ -34,12 +46,15 @@
         },
         "resources": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "grafanaAgent": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "limits": {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "cpu": {
                                     "type": "string"
@@ -51,6 +66,7 @@
                         },
                         "requests": {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "cpu": {
                                     "type": "string"
@@ -64,9 +80,11 @@
                 },
                 "main": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "limits": {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "cpu": {
                                     "type": "string"
@@ -78,6 +96,7 @@
                         },
                         "requests": {
                             "type": "object",
+                            "additionalProperties": false,
                             "properties": {
                                 "cpu": {
                                     "type": "string"
