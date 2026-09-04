@@ -1,6 +1,4 @@
 # ATS (app-test-suite) config for the generated execute-chart-tests CI job.
 # This repo has no ATS test scenarios yet; skip the scenario steps so the
 # chart validation part of ATS can pass. Remove skip-steps when tests exist.
-smoke-tests-cluster-type: kind
-upgrade-tests-cluster-type: kind
 skip-steps: [smoke, functional, upgrade]
