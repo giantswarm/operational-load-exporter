@@ -8,6 +8,9 @@ A Helm chart for operational-load-exporter
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| image.registry | string | `"gsoci.azurecr.io"` |  |
+| image.name | string | `"giantswarm/operational-load-exporter"` |  |
+| image.tag | string | `""` |  |
 | cortex.url | string | `""` |  |
 | cortex.username | string | `""` |  |
 | cortex.password | string | `""` |  |

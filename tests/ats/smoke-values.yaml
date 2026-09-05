@@ -1,0 +1,24 @@
+# Values for the app-test-suite smoke (tests/ats/test_smoke.py) on the bare kind cluster
+# the generated execute-chart-tests job creates. Layered over the chart defaults, see
+# .ats/main.yaml (app-tests-app-config-file).
+
+image:
+  # Branch builds publish no image (build-image runs with push: false) and the orb stamps
+  # appVersion with the dev version, so the chart's default tag exists in no registry.
+  # Pin the latest release; bump it when the chart needs a newer image.
+  tag: "0.5.11"
+
+# The exporter exits on empty keys (log.Fatal in main.go); the keys are only sent to
+# GitHub / incident.io on scrape, which the smoke never triggers. The chart writes them
+# straight into the Secret's `data:` (already base64), hence base64 "smoke".
+github:
+  key: c21va2U=
+incidentio:
+  key: c21va2U=
+
+# The grafana-agent sidecar refuses to start on an empty remote_write URL. Nothing listens
+# here; the agent just logs failed pushes.
+cortex:
+  url: http://cortex.invalid/api/v1/push
+  username: smoke
+  password: smoke
