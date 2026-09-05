@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: operational-load-exporter
-        image: gsoci.azurecr.io/giantswarm/operational-load-exporter:{{ .Chart.AppVersion }}
+        image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         resources:
           {{- toYaml .Values.resources.main | nindent 10 }}
         env:

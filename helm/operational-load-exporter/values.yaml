@@ -1,3 +1,9 @@
+image:
+  registry: gsoci.azurecr.io
+  name: giantswarm/operational-load-exporter
+  # Defaults to the chart's appVersion.
+  tag: ""
+
 cortex:
   url: ""
   username: ""

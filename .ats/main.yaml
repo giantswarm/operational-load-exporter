@@ -1,4 +1,16 @@
-# ATS (app-test-suite) config for the generated execute-chart-tests CI job.
-# This repo has no ATS test scenarios yet; skip the scenario steps so the
-# chart validation part of ATS can pass. Remove skip-steps when tests exist.
-skip-steps: [smoke, functional, upgrade]
+# app-test-suite (ats >= 1.0) config for the generated execute-chart-tests CircleCI job.
+# ats creates a kind cluster, applies the CRDs below, installs the packaged chart with
+# `helm upgrade --install --wait` and runs `uv run pytest -m smoke` in tests/ats.
+#
+# The chart hard-codes `namespace: operational-load-exporter` on its resources, so the
+# release must go there.
+app-tests-deploy-namespace: operational-load-exporter
+app-tests-app-config-file: tests/ats/smoke-values.yaml
+
+# The chart's PolicyException is policy.giantswarm.io/v1alpha1 (kyverno-policy-operator's
+# API), which the ats bundle (/etc/ats/crds) does not carry, so its CRD is appended here.
+cluster-crds: /etc/ats/crds,https://raw.githubusercontent.com/giantswarm/policy-api/v0.0.11/crds/policy.giantswarm.io_policyexceptions.yaml
+
+# functional: no functional tests yet.
+# upgrade: needs upgrade-tests-app-catalog-url pointing at the released chart; not wired.
+skip-steps: [functional, upgrade]
