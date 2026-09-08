@@ -1,13 +1,13 @@
 module github.com/giantswarm/operational-load-exporter
 
-go 1.25.0
+go 1.26.0
 
 toolchain go1.27.1
 
 require (
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/prometheus/client_golang v1.24.1
-	golang.org/x/oauth2 v0.36.0
+	golang.org/x/oauth2 v0.37.0
 )
 
 require (
