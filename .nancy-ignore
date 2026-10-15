@@ -1,2 +1,5 @@
-CVE-2026-63209 until=2026-09-09 # github.com/klauspost/compress@v1.18.0
-CVE-2026-46600 until=2026-09-09 # golang.org/x/net@v0.55.0
+CVE-2026-78669 until=2026-11-13 # golang.org/x/net@v0.59.0
+CVE-2026-97032 until=2026-11-13 # golang.org/x/net@v0.59.0
+CVE-2026-78659 until=2026-11-13 # golang.org/x/net@v0.59.0
+CVE-2026-78660 until=2026-11-13 # golang.org/x/net@v0.59.0
+CVE-2026-78663 until=2026-11-13 # golang.org/x/net@v0.59.0
