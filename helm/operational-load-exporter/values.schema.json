@@ -64,21 +64,25 @@
                             "type": [
                                 "string",
                                 "integer"
-                            ]
+                            ],
+                            "description": "The App ID. Accepts a string or a number."
                         },
                         "installationID": {
                             "type": [
                                 "string",
                                 "integer"
-                            ]
+                            ],
+                            "description": "The installation ID of the App on the giantswarm organization. Accepts a string or a number."
                         },
                         "privateKey": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "The App private key, PEM text (not base64; the chart encodes it)."
                         }
                     }
                 },
                 "key": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Legacy personal access token (already base64, written straight into the Secret's `data:`). Used only when the GitHub App values below are not all set."
                 }
             }
         },

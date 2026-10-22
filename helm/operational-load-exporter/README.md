@@ -14,9 +14,9 @@ A Helm chart for operational-load-exporter
 | cortex.url | string | `""` |  |
 | cortex.username | string | `""` |  |
 | cortex.password | string | `""` |  |
-| github.key | string | `""` | Legacy personal access token (already base64). Used only when the GitHub App values are not all set. |
-| github.app.id | string | `""` | The App ID. |
-| github.app.installationID | string | `""` | The installation ID of the App on the giantswarm organization. |
+| github.key | string | `""` | Legacy personal access token (already base64, written straight into the Secret's `data:`). Used only when the GitHub App values below are not all set. |
+| github.app.id | string | `""` | The App ID. Accepts a string or a number. |
+| github.app.installationID | string | `""` | The installation ID of the App on the giantswarm organization. Accepts a string or a number. |
 | github.app.privateKey | string | `""` | The App private key, PEM text (not base64; the chart encodes it). |
 | incidentio.key | string | `""` |  |
 | resources.main.requests.cpu | string | `"2m"` |  |
