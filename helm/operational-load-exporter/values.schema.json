@@ -61,10 +61,16 @@
                     "additionalProperties": false,
                     "properties": {
                         "id": {
-                            "type": "string"
+                            "type": [
+                                "string",
+                                "integer"
+                            ]
                         },
                         "installationID": {
-                            "type": "string"
+                            "type": [
+                                "string",
+                                "integer"
+                            ]
                         },
                         "privateKey": {
                             "type": "string"

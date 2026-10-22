@@ -5,7 +5,10 @@ import (
 	"testing"
 )
 
-const testToken = "tok"
+const (
+	testToken = "tok"
+	errNoAuth = "no GitHub credentials"
+)
 
 func TestGithubAuthFromEnv(t *testing.T) {
 	const pem = "-----BEGIN " + "RSA PRIVATE KEY-----\nabc\n-----END " + "RSA PRIVATE KEY-----\n" // not a real key
@@ -41,14 +44,25 @@ func TestGithubAuthFromEnv(t *testing.T) {
 			wantToken: testToken,
 		},
 		{
+			name:      "token is trimmed",
+			env:       map[string]string{envGitHubKey: " tok\n"},
+			wantMode:  githubAuthToken,
+			wantToken: testToken,
+		},
+		{
+			name:         "whitespace-only token counts as unset",
+			env:          map[string]string{envGitHubKey: " \n"},
+			wantErrParts: []string{errNoAuth},
+		},
+		{
 			name:         "nothing set",
 			env:          map[string]string{},
-			wantErrParts: []string{"no GitHub credentials", envGitHubAppID, envGitHubKey},
+			wantErrParts: []string{errNoAuth, envGitHubAppID, envGitHubKey},
 		},
 		{
 			name:         "whitespace only counts as unset",
 			env:          map[string]string{envGitHubAppID: " ", envGitHubKey: ""},
-			wantErrParts: []string{"no GitHub credentials"},
+			wantErrParts: []string{errNoAuth},
 		},
 		{
 			name:         "only app id",

@@ -78,7 +78,7 @@ func githubAuthFromEnv(getenv func(string) string) (githubAuthConfig, error) {
 			strings.Join(set, ", "), strings.Join(missing, ", "))
 	}
 
-	if token := getenv(envGitHubKey); token != "" {
+	if token := strings.TrimSpace(getenv(envGitHubKey)); token != "" {
 		return githubAuthConfig{mode: githubAuthToken, token: token}, nil
 	}
 

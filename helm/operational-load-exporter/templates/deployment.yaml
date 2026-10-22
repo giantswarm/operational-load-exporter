@@ -12,6 +12,9 @@ spec:
       app: operational-load-exporter
   template:
     metadata:
+      annotations:
+      {{- /* Restart the pod when the credentials in the Secret change. */}}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
       labels:
         app: operational-load-exporter
     spec:
