@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Authenticate to GitHub as a GitHub App (`github.app.id`, `github.app.installationID`, `github.app.privateKey`) instead of a personal access token. `GITHUB_KEY` still works as a fallback when no App values are set.
+
+### Changed
+
+- All GitHub environment variables are now optional in the chart, so either authentication mode works.
+
 ## [0.5.0] - 2026-01-05
 
 ### Fixed

@@ -26,7 +26,25 @@ spec:
             secretKeyRef:
               name: operational-load-exporter
               key: GITHUB_KEY
-              optional: false
+              optional: true
+        - name: GITHUB_APP_ID
+          valueFrom:
+            secretKeyRef:
+              name: operational-load-exporter
+              key: GITHUB_APP_ID
+              optional: true
+        - name: GITHUB_APP_INSTALLATION_ID
+          valueFrom:
+            secretKeyRef:
+              name: operational-load-exporter
+              key: GITHUB_APP_INSTALLATION_ID
+              optional: true
+        - name: GITHUB_APP_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: operational-load-exporter
+              key: GITHUB_APP_PRIVATE_KEY
+              optional: true
         - name: INCIDENT_IO_KEY
           valueFrom:
             secretKeyRef:
