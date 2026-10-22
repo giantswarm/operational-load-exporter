@@ -18,7 +18,13 @@ const (
 )
 
 func main() {
-	githubCollector, err := NewGitHubCollector(os.Getenv("GITHUB_KEY"))
+	githubAuth, err := githubAuthFromEnv(os.Getenv)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Printf("authenticating to GitHub using mode %q", githubAuth.mode)
+
+	githubCollector, err := NewGitHubCollector(githubAuth)
 	if err != nil {
 		log.Fatal(err)
 	}

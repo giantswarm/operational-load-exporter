@@ -2,13 +2,11 @@ package main
 
 import (
 	"context"
-	"errors"
 	"log"
 	"strings"
 
 	"github.com/google/go-github/github"
 	"github.com/prometheus/client_golang/prometheus"
-	"golang.org/x/oauth2"
 )
 
 type IssueGroupType string
@@ -56,16 +54,13 @@ func contains(ss []string, s string) bool {
 	return false
 }
 
-func NewGitHubCollector(accessToken string) (*githubCollector, error) {
-	if accessToken == "" {
-		return nil, errors.New("github access token cannot be blank")
-	}
-
+func NewGitHubCollector(auth githubAuthConfig) (*githubCollector, error) {
 	ctx := context.Background()
-	ts := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: accessToken},
-	)
-	tc := oauth2.NewClient(ctx, ts)
+
+	tc, err := auth.httpClient(ctx)
+	if err != nil {
+		return nil, err
+	}
 
 	client := github.NewClient(tc)
 
