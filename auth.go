@@ -7,10 +7,15 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/bradleyfalzon/ghinstallation/v2"
 	"golang.org/x/oauth2"
 )
+
+// githubHTTPTimeout bounds each request in App mode, including the token
+// exchange the installation transport performs.
+const githubHTTPTimeout = 30 * time.Second
 
 const (
 	envGitHubAppID             = "GITHUB_APP_ID"
@@ -94,7 +99,7 @@ func (a githubAuthConfig) httpClient(ctx context.Context) (*http.Client, error) 
 		if err != nil {
 			return nil, fmt.Errorf("creating GitHub App installation transport: %w", err)
 		}
-		return &http.Client{Transport: tr}, nil
+		return &http.Client{Transport: tr, Timeout: githubHTTPTimeout}, nil
 	}
 
 	ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: a.token})

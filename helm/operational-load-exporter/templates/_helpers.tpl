@@ -34,3 +34,12 @@ Selector labels
 app.kubernetes.io/name: {{ include "name" . | quote }}
 app.kubernetes.io/instance: {{ .Release.Name | quote }}
 {{- end -}}
+
+{{/*
+Render a numeric ID as a plain integer string. YAML parses unquoted numbers as
+float64, which toString would print as 1.234567e+06. Strings pass through
+unchanged, so a non-numeric value reaches the exporter and is rejected there.
+*/}}
+{{- define "github.app.intString" -}}
+{{- if kindIs "string" . -}}{{ . }}{{- else -}}{{ int64 . }}{{- end -}}
+{{- end -}}
