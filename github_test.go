@@ -42,14 +42,14 @@ func (f *fakeGitHub) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			drop := f.dropHoneybadger
 			f.mu.Unlock()
 			if drop {
-				fmt.Fprint(w, `[{"name":"team/null"}]`)
+				_, _ = fmt.Fprint(w, `[{"name":"team/null"}]`)
 				return
 			}
-			fmt.Fprint(w, `[{"name":"team/null"},{"name":"team/honeybadger"}]`)
+			_, _ = fmt.Fprint(w, `[{"name":"team/null"},{"name":"team/honeybadger"}]`)
 			return
 		}
 		w.Header().Set("Link", fmt.Sprintf(`<%s?page=2>; rel="next"`, "http://"+r.Host+r.URL.Path))
-		fmt.Fprint(w, `[{"name":"bug"},{"name":"team/cabbage"},{"name":"postmortem"}]`)
+		_, _ = fmt.Fprint(w, `[{"name":"bug"},{"name":"team/cabbage"},{"name":"postmortem"}]`)
 	case "/search/issues":
 		q := r.URL.Query().Get("q")
 
@@ -82,13 +82,13 @@ func (f *fakeGitHub) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			// The current documentation URL, which go-github v17 does not
 			// recognise as an abuse rate limit.
 			w.WriteHeader(http.StatusForbidden)
-			fmt.Fprint(w, `{"message":"You have exceeded a secondary rate limit. Please wait a few minutes before you try again.","documentation_url":"https://docs.github.com/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits"}`)
+			_, _ = fmt.Fprint(w, `{"message":"You have exceeded a secondary rate limit. Please wait a few minutes before you try again.","documentation_url":"https://docs.github.com/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits"}`)
 			return
 		}
 		if tooMany {
 			w.Header().Set("Retry-After", "0")
 			w.WriteHeader(http.StatusTooManyRequests)
-			fmt.Fprint(w, `{"message":"You have exceeded a secondary rate limit."}`)
+			_, _ = fmt.Fprint(w, `{"message":"You have exceeded a secondary rate limit."}`)
 			return
 		}
 		if limited {
@@ -96,15 +96,15 @@ func (f *fakeGitHub) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("X-RateLimit-Remaining", "0")
 			w.Header().Set("X-RateLimit-Reset", strconv.FormatInt(time.Now().Unix(), 10))
 			w.WriteHeader(http.StatusForbidden)
-			fmt.Fprint(w, `{"message":"API rate limit exceeded for installation."}`)
+			_, _ = fmt.Fprint(w, `{"message":"API rate limit exceeded for installation."}`)
 			return
 		}
 		if failing {
 			w.WriteHeader(http.StatusInternalServerError)
-			fmt.Fprint(w, `{"message":"boom"}`)
+			_, _ = fmt.Fprint(w, `{"message":"boom"}`)
 			return
 		}
-		fmt.Fprintf(w, `{"total_count":%d,"items":[]}`, total)
+		_, _ = fmt.Fprintf(w, `{"total_count":%d,"items":[]}`, total)
 	default:
 		f.t.Errorf("unexpected request %s", r.URL)
 		w.WriteHeader(http.StatusNotFound)
