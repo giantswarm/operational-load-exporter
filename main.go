@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"os"
@@ -29,6 +30,7 @@ func main() {
 		log.Fatal(err)
 	}
 	prometheus.MustRegister(githubCollector)
+	go githubCollector.Run(context.Background())
 
 	incidentCollector, err := NewIncidentCollector(os.Getenv("INCIDENT_IO_KEY"))
 	if err != nil {
