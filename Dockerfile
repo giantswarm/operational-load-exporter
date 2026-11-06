@@ -1,4 +1,4 @@
-FROM gsoci.azurecr.io/giantswarm/alpine:3.24.3
+FROM gsoci.azurecr.io/giantswarm/alpine:3.24.4
 
 RUN apk update && apk --no-cache add ca-certificates && \
   update-ca-certificates
